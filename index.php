@@ -1,5 +1,25 @@
 <?php 
     include 'koneksi.php';
+
+    $query =  "Select * from tb_pasien;";
+    $sql = mysqli_query($koneksi,$query);
+
+    //$result = mysqli_fetch_row($sql); kalo mau ambil baris
+    //var_dump($result);
+    // $result = mysqli_fetch_assoc($sql);
+    // echo $result['namapasien'];
+
+    //untuk menampilkan semua data kita bisa pakai perulangan while
+
+    // while ($result = mysqli_fetch_assoc($sql)) {
+    //     echo $result['namapasien'];
+    //     echo "<br>";
+    // }
+
+    // foreach ($sql as $key ) {
+    //     echo $key['namapasien'];
+    //     echo "<br>";
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +58,7 @@
         <i class="fa fa-plus"></i>
         Tambah Data
     </button> -->
-    <a href="kelola.php" type="button" class="btn btn-primary mb-3">
+    <a href="tambah.php" type="button" class="btn btn-primary mb-3">
         <i class="fa fa-plus"></i>
         Tambah Data
     </a>
@@ -50,7 +70,6 @@
                     <th>No RM</th>
                     <th>Nama Pasien</th>
                     <th>Jenis Kelamin</th>
-                    <th>Foto KTP</th>
                     <th>Alamat</th>
                     <th>No HP</th>
                     <th>Penjanmin</th>
@@ -58,30 +77,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1.</td>
-                    <td>33-33-33</td>
-                    <td>Widhi</td>
-                    <td>Laki-laki</td>
-                    <td>
-                        <img src="img/img1.jpg" style="width: 150px;">
-                    </td>
-                    <td>Jl.Wonosari KM 10</td>
-                    <td>081328479152</td>
-                    <td>BPJS</td>
-                    <td>
+                <?php 
+                    $no=1;
+                    foreach ($sql as $key) {?>
+                    <tr>
+                        <td><?php echo $no++ ?></td>
+                        <td><?php echo $key['norm']?></td>
+                        <td><?php echo $key['namapasien']?></td>
+                        <td><?php echo $key['jk']?></td>
+                        <td><?php echo $key['alamat']?></td>
+                        <td><?php echo $key['nohp']?></td>
+                        <td><?php echo $key['penjamin']?></td>
+                        <td>
+                                <a href="kelola.php?ubah=<?php echo $key['id']?>" type="button-" class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit
+                                </a>
+                                <a href="proseshapus.php?hapus=<?php echo $key['id']?>" type="button" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                    Delete
+                                </a>
 
-                        <a href="kelola.php?ubah=1" type="button-" class="btn btn-warning">
-                            <i class="fa fa-pencil"></i>
-                            Edit
-                        </a>
-                        <a href="proses.php?hapus=1" type="button" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                            Delete
-                        </a>
-                        
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                    
+                    
+                <?php } ?>
             </tbody>
         </table>
       </div>
