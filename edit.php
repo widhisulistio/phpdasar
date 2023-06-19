@@ -1,3 +1,16 @@
+<?php 
+    include 'koneksi.php';
+    //var_dump($_POST);
+    
+    $id = $_GET['ubah'];
+    
+    $query = "SELECT * FROM tb_pasien WHERE id='$id'";
+    $sql = mysqli_query($koneksi, $query);
+    $row = $sql -> fetch_array(MYSQLI_ASSOC);
+    //$row = mysqli_fetch_array($sql);
+    
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,35 +38,25 @@
     <div class="mb-3 row">
         <label for="norm" class="col-sm-2 col-form-label">No RM</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="norm" placeholder="no rekam medis pasien">
+          <input type="text" class="form-control" id="norm" placeholder="no rekam medis pasien" name="norm" value="<?php echo $row['norm'] ?>">
         </div>
       </div>
 
       <div class="mb-3 row">
         <label for="nama" class="col-sm-2 col-form-label">Nama Pasien</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="nama" placeholder="contoh: widhi sulistyo">
+          <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['namapasien'] ?>" placeholder="contoh: widhi sulistyo">
         </div>
       </div>
       <!-- forms:select -->
       <div class="mb-3 row">
         <label for="jk" class="col-sm-2 col-form-label">Jenis Kelamin</label>
         <div class="col-sm-10">
-            <select class="form-select" id="jk">
-                <option selected>Jenis Kelamin</option>
+            <select class="form-select" id="jk" name="jk" >
+                <option value="<?= $row['jk']?>"><?= $row['jk']?></option>
                 <option value="laki-laki">Laki-Laki</option>
                 <option value="perempuan">Perempuan</option>
               </select>
-        </div>
-      </div>
-    
-      <!-- forms:formcontrol:File input -->
-      <div class="mb-3 row">
-        <label for="ktp" class="col-sm-2 col-form-label">KTP</label>
-        <div class="col-sm-10">
-            <div class="mb-3">
-                <input class="form-control" type="file" id="ktp">
-              </div>
         </div>
       </div>
 
@@ -62,7 +65,7 @@
         <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
         <div class="col-sm-10">
             <div class="mb-3">
-                <textarea class="form-control" id="alamat" rows="3"></textarea>
+                <textarea class="form-control" id="alamat" name="alamat" <?=$row['alamat'] ?> rows="3"><?= $row['alamat']?></textarea>
             </div>
         </div>
     </div>
@@ -70,7 +73,7 @@
     <div class="mb-3 row">
         <label for="hp" class="col-sm-2 col-form-label">No Handphone</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="hp" placeholder="no hp pasien">
+            <input type="text" class="form-control" id="hp" name="nohp" value="<?= $row['nohp']?>" placeholder="no hp pasien">
         </div>
     </div>
      <!-- forms:select -->
@@ -78,19 +81,19 @@
         <label for="jaminan" class="col-sm-2 col-form-label">Jaminan</label>
         <div class="col-sm-10">
             <div class="form-check-inline">
-                <input class="form-check-input" type="radio" name="jaminan" id="jaminan">
+                <input class="form-check-input" type="radio" name="jaminan" id="jaminan" value="umum" <?php if (isset($row['penjamin']) && $row['penjamin']=='umum') echo "checked" ?> value="umum">
                 <label class="form-check-label" for="flexRadioDefault1">
                     Umum
                 </label>
             </div>
             <div class="form-check-inline">
-                <input class="form-check-input" type="radio" name="jaminan" id="jaminan">
+                <input class="form-check-input" type="radio" name="jaminan" id="jaminan" <?php if (isset($row['penjamin']) && $row['penjamin']=='bpjs') echo "checked" ?> value="bpjs">
                 <label class="form-check-label" for="flexRadioDefault1">
                     BPJS
                 </label>
             </div>
             <div class="form-check-inline">
-                <input class="form-check-input" type="radio" name="jaminan" id="jaminan">
+                <input class="form-check-input" type="radio" name="jaminan" id="jaminan" <?php if (isset($row['penjamin']) && $row['penjamin']=='jasaraharja') echo "checked" ?> value="jasaraharja">
                 <label class="form-check-label" for="flexRadioDefault1">
                     Jasa Raharja
                 </label>

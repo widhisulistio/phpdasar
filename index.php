@@ -89,7 +89,7 @@
                         <td><?php echo $key['nohp']?></td>
                         <td><?php echo $key['penjamin']?></td>
                         <td>
-                                <a href="kelola.php?ubah=<?php echo $key['id']?>" type="button-" class="btn btn-warning">
+                                <a href="edit.php?ubah=<?php echo $key['id']?>" type="button-" class="btn btn-warning">
                                     <i class="fa fa-pencil"></i>
                                     Edit
                                 </a>
@@ -100,8 +100,6 @@
 
                         </td>
                     </tr>
-                    
-                    
                 <?php } ?>
             </tbody>
         </table>
