@@ -33,8 +33,10 @@
   </div>
 </nav>
 <!--judul -->
-<div class="container-fluid">
+<form method="POST" action="prosesedit.php">
+    <div class="container-fluid">
     <!-- form-control:Readonly plain text -->
+    <input type="hidden" name="id" value="<?= $row['id'];?>">
     <div class="mb-3 row">
         <label for="norm" class="col-sm-2 col-form-label">No RM</label>
         <div class="col-sm-10">
@@ -102,7 +104,7 @@
     </div>
     <div class="mb-3 row">
         <div class="col">
-            <button type="button" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" name="ubah">
                 Simpan
             </button>
             <button type="button" class="btn btn-danger" onclick="window.location.href='index.php';">
@@ -113,6 +115,9 @@
         </div>
     </div>
 </div>
+
+
+</form>
 
 
 </body>
